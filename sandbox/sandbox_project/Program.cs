@@ -8,6 +8,11 @@ public class Program
         // with any code or ideas you have that do not directly apply to
         // one of your projects.
 
+        // O(2n) => O(n)
+        // O(n^2)
+        // O(n)
+        
+
         Console.WriteLine("Hello Sandbox World!");
     }
 }
