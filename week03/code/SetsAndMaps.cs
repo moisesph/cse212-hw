@@ -1,4 +1,5 @@
 using System.Text.Json;
+using System.Linq;
 
 public static class SetsAndMaps
 {
@@ -17,12 +18,33 @@ public static class SetsAndMaps
     /// As a special case, if the letters are the same (example: 'aa') then
     /// it would not match anything else (remember the assumption above
     /// that there were no duplicates) and therefore should not be returned.
-    /// </summary>
+    /// </summary>Z
     /// <param name="words">An array of 2-character words (lowercase, no duplicates)</param>
     public static string[] FindPairs(string[] words)
     {
         // TODO Problem 1 - ADD YOUR CODE HERE
-        return [];
+        HashSet<string> convertingList = new();
+
+        List<string> converted = new();
+
+        foreach (var a in words)
+        {
+            convertingList.Add(a);
+            char[] inverting = a.ToCharArray();
+            Array.Reverse(inverting);
+            var inverted = new string(inverting);
+            if (convertingList.Contains(a) && convertingList.Contains(inverted) && a != inverted)
+            {
+                var stringResult = $"{a} & {inverted}";
+                converted.Add(stringResult);
+            }
+            ;
+        }
+
+        string[] result = converted.ToArray();
+
+
+        return result;
     }
 
     /// <summary>
@@ -43,6 +65,20 @@ public static class SetsAndMaps
         {
             var fields = line.Split(",");
             // TODO Problem 2 - ADD YOUR CODE HERE
+            var name = fields[3];
+            var initialPoints = 1;
+
+            if (degrees.ContainsKey(name))
+            {
+                degrees[name] += 1;
+
+            }
+            else
+            {
+                degrees.Add(name, initialPoints);
+            }
+
+
         }
 
         return degrees;
@@ -66,8 +102,54 @@ public static class SetsAndMaps
     /// </summary>
     public static bool IsAnagram(string word1, string word2)
     {
-        // TODO Problem 3 - ADD YOUR CODE HERE
-        return false;
+        var noSpacesWord1 = word1.Replace(" ", "");
+        var noSpacesWord2 = word2.Replace(" ", "");
+
+        var upperWord1 = noSpacesWord1.ToUpper();
+        var upperWord2 = noSpacesWord2.ToUpper();
+
+        word1 = upperWord1;
+        word2 = upperWord2;
+
+        Dictionary<char, int> anagramsDictionary1 = new Dictionary<char, int>();
+        Dictionary<char, int> anagramsDictionary2 = new Dictionary<char, int>();
+
+        char[] letters1 = word1.ToCharArray();
+        char[] letters2 = word2.ToCharArray();
+
+        var initialValue = 0;
+
+
+        if (letters1.Length != letters2.Length)
+        {
+            return false;
+        }
+
+        foreach (char a in letters1)
+        {
+            if (!anagramsDictionary1.ContainsKey(a))
+            {
+                anagramsDictionary1.Add(a, initialValue);
+            }
+            else anagramsDictionary1[a] += 1;
+
+        }
+
+        foreach (char a in letters2)
+        {
+            if (!anagramsDictionary2.ContainsKey(a))
+            {
+                anagramsDictionary2.Add(a, initialValue);
+            }
+            else anagramsDictionary2[a] += 1;
+        }
+
+        bool isAnAnagram = anagramsDictionary1.All(e => anagramsDictionary2.TryGetValue(e.Key, out int e2) && e.Value == e2);
+
+        return isAnAnagram;
+
+
+
     }
 
     /// <summary>

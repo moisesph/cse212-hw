@@ -24,7 +24,10 @@
 
     private static int CountDuplicates(int[] data)
     {
-        // Add code here.
-        return 0;
+        var counter = data.Union(data).ToHashSet();
+
+        var counted = counter.Count();
+
+        return counted;
     }
 }
