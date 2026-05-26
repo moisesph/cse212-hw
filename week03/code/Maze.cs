@@ -20,9 +20,13 @@ public class Maze
     private int _currX = 1;
     private int _currY = 1;
 
+    private string messageCantGo = "Can't go that way!";
+
+
     public Maze(Dictionary<ValueTuple<int, int>, bool[]> mazeMap)
     {
         _mazeMap = mazeMap;
+
     }
 
     // TODO Problem 4 - ADD YOUR CODE HERE
@@ -33,6 +37,17 @@ public class Maze
     public void MoveLeft()
     {
         // FILL IN CODE
+        var left = 0;
+        bool validMovement = _mazeMap[(_currX, _currY)][left];
+
+
+        if (!validMovement)
+        {
+            throw new InvalidOperationException(messageCantGo);
+        }
+        else _currX -= 1;
+
+
     }
 
     /// <summary>
@@ -42,7 +57,19 @@ public class Maze
     public void MoveRight()
     {
         // FILL IN CODE
+        var right = 1;
+        bool validMovement = _mazeMap[(_currX, _currY)][right];
+
+
+        if (!validMovement)
+        {
+            throw new InvalidOperationException(messageCantGo);
+        }
+        else _currX += 1;
+
+
     }
+
 
     /// <summary>
     /// Check to see if you can move up.  If you can, then move.  If you
@@ -51,6 +78,16 @@ public class Maze
     public void MoveUp()
     {
         // FILL IN CODE
+        var up = 2;
+        bool validMovement = _mazeMap[(_currX, _currY)][up];
+
+
+        if (!validMovement)
+        {
+            throw new InvalidOperationException(messageCantGo);
+        }
+        else _currY -= 1;
+
     }
 
     /// <summary>
@@ -60,6 +97,15 @@ public class Maze
     public void MoveDown()
     {
         // FILL IN CODE
+        var down = 3;
+        bool validMovement = _mazeMap[(_currX, _currY)][down];
+
+        if (!validMovement)
+        {
+            throw new InvalidOperationException(messageCantGo);
+        }
+        else _currY += 1;
+
     }
 
     public string GetStatus()
