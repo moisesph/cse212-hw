@@ -1,5 +1,5 @@
 ﻿// DO NOT MODIFY THIS FILE
-public class Node
+public class Node 
 {
     public int Data { get; set; }
     public Node? Next { get; set; }
