@@ -13,8 +13,24 @@ public static class Recursion
     /// n <= 0, just return 0.   A loop should not be used.
     /// </summary>
     public static int SumSquaresRecursive(int n)
-    {
+    { 
         // TODO Start Problem 1
+        int numBase = 1;
+        int exponent = 2;
+
+        double resultSum;
+
+        if (n <= numBase) {
+            return 0;
+        }
+        else
+        {
+            resultSum = Math.Pow(numBase, exponent);
+            resultSum += SumSquaresRecursive(n);
+             int result = resultSum ;
+             return result 
+        }
+
         return 0;
     }
 
