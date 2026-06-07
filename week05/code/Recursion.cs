@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Linq;
 
 public static class Recursion
 {
@@ -57,9 +58,17 @@ public static class Recursion
     public static void PermutationsChoose(List<string> results, string letters, int size, string word = "")
     {
         // TODO Start Problem 2
-        char[] lettersSeparated = letters.ToCharArray();
+        
+        List<string> lettersSeparated = letters.Select(l => l.ToString()).ToList();
 
         results.Add(lettersSeparated[0]);
+
+        if(lettersSeparated.Count() > 0)
+        {
+            lettersSeparated.RemoveAt(0);
+            PermutationsChoose(lettersSeparated, letters, size);
+        }
+        else{return;}
     }
 
     /// <summary>
