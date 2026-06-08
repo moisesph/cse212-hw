@@ -58,17 +58,26 @@ public static class Recursion
     public static void PermutationsChoose(List<string> results, string letters, int size, string word = "")
     {
         // TODO Start Problem 2
-        
-        List<string> lettersSeparated = letters.Select(l => l.ToString()).ToList();
-
-        results.Add(lettersSeparated[0]);
-
-        if(lettersSeparated.Count() > 0)
+        if (word.Length == size)
         {
-            lettersSeparated.RemoveAt(0);
-            PermutationsChoose(lettersSeparated, letters, size);
+            results.Add(word);
+
         }
-        else{return;}
+
+        else
+        {
+            foreach (var letter in letters)
+            {
+
+                if (word == null || word == "" || !word.Contains(letter))
+                {
+                    word += letter;
+                    PermutationsChoose(results, letters, size, word);
+                    word = word.Substring(0, word.Length - 1);
+                }
+
+            }
+        }
     }
 
     /// <summary>
@@ -115,6 +124,9 @@ public static class Recursion
     /// </summary>
     public static decimal CountWaysToClimb(int s, Dictionary<int, decimal>? remember = null)
     {
+
+        remember ??= new Dictionary<int, decimal>();
+
         // Base Cases
         if (s == 0)
             return 0;
@@ -125,10 +137,17 @@ public static class Recursion
         if (s == 3)
             return 4;
 
+        if (remember.ContainsKey(s))
+        {
+            return remember[s];
+        }
+
         // TODO Start Problem 3
 
         // Solve using recursion
-        decimal ways = CountWaysToClimb(s - 1) + CountWaysToClimb(s - 2) + CountWaysToClimb(s - 3);
+        decimal ways = CountWaysToClimb(s - 1, remember) + CountWaysToClimb(s - 2, remember) + CountWaysToClimb(s - 3, remember);
+
+        remember[s] = ways;
         return ways;
     }
 
@@ -148,6 +167,14 @@ public static class Recursion
     public static void WildcardBinary(string pattern, List<string> results)
     {
         // TODO Start Problem 4
+
+        results.Add(pattern);
+        if (results.Contains(pattern))
+        {
+            return;
+        }
+
+
     }
 
     /// <summary>
