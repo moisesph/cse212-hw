@@ -81,6 +81,27 @@ public class BinarySearchTree : IEnumerable<int>
     private void TraverseBackward(Node? node, List<int> values)
     {
         // TODO Problem 3
+        // Expected: 10, 7, 6, 5, 4, 3, 1
+        // Got:      10, 6, 7, 4, 1, 3, 5
+
+        if (node.Data == null) { return; }
+        if (node.Right == null && node.Left == null && !values.Contains(node.Data)) { values.Add(node.Data); }
+
+        if (node.Right != null) { TraverseBackward(node.Right, values); }
+        if (!values.Contains(node.Data)) { values.Add(node.Data); }
+        if (node.Left != null) { TraverseBackward(node.Left, values); }
+
+
+
+
+
+
+        // if (node.Right == null && !values.Contains(node.Data) || values.Contains(node.Right.Data) && !values.Contains(node.Data)) { values.Add(node.Data); }
+        // else if (node.Right != null) TraverseBackward(node.Right, values);
+
+        // if (node.Left == null && !values.Contains(node.Data) || values.Contains(node.Left.Data) && !values.Contains(node.Data)) { values.Add(node.Data); }
+        // else if (node.Left != null) TraverseBackward(node.Left, values);
+
     }
 
     /// <summary>
@@ -99,8 +120,10 @@ public class BinarySearchTree : IEnumerable<int>
     }
 }
 
-public static class IntArrayExtensionMethods {
-    public static string AsString(this IEnumerable array) {
+public static class IntArrayExtensionMethods
+{
+    public static string AsString(this IEnumerable array)
+    {
         return "<IEnumerable>{" + string.Join(", ", array.Cast<int>()) + "}";
     }
 }

@@ -169,11 +169,11 @@ public static class Recursion
         // TODO Start Problem 4
 
         results.Add(pattern);
-        if (results.Contains(pattern))
+        if (!results.Contains("*"))
         {
             return;
         }
-
+        //La base es que si no contiene * y tambien si el length del pattern es lo que se espera lo agrega
 
     }
 
